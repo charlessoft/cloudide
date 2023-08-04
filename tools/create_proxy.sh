@@ -14,8 +14,8 @@ PROXY_NAME=$4
 
 
 echo "==========config web site config=========="
-export SITE_NAME=${ACCOUNT}.${DOMAIN}
-# echo $SITE_NAME
+# export SITE_NAME=${ACCOUNT}.${DOMAIN}
+echo $SITE_NAME
 # mkdir -p /www/server/panel/vhost/nginx/proxy/${SITE_NAME}
 
 

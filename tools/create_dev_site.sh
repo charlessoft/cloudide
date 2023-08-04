@@ -108,8 +108,8 @@ PROXY_NAME=default
 DEFAULT_PORT=3000
 # 创建反向代理
 mkdir -p /www/server/panel/vhost/nginx/proxy/${SITE_NAME}
-echo "create proxy ${ACCOUNT} ${CONTAINER_IP} ${DEFAULT_PORT} ${PROXY_NAME}"
-sh create_proxy.sh ${ACCOUNT} ${CONTAINER_IP} ${DEFAULT_PORT} ${PROXY_NAME}
+echo "create proxy ${SITE_NAME} ${CONTAINER_IP} ${DEFAULT_PORT} ${PROXY_NAME}"
+sh create_proxy.sh ${SITE_NAME} ${CONTAINER_IP} ${DEFAULT_PORT} ${PROXY_NAME}
 
 systemctl restart nginx
 

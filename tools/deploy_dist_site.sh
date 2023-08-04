@@ -1,17 +1,18 @@
 #!/bin/bash
 source ./config.sh
 
-if [ "$#" -lt 2 ]; then
-    echo "sh forward_port account forward_port"
+if [ "$#" -lt 1 ]; then
+    echo "sh create_new_site.sh xxx"
     exit 1
 fi
 
 ACCOUNT=$1
-FORWARED_PORT=$2
+
+
 
 
 echo "==========config web site config=========="
-export SITE_NAME=${ACCOUNT}-${FORWARED_PORT}.${DOMAIN}
+# export SITE_NAME=${ACCOUNT}.${DOMAIN}
 echo $SITE_NAME
 mkdir -p /usr/local/nginx/conf/vhost/
 mkdir -p /www/wwwlogs
@@ -43,7 +44,7 @@ server
     #    #access_log  /www/wwwlogs/${SITE_NAME}_purge_cache.log;
     #}
       #引用反向代理规则，注释后配置的反向代理将无效
-      include /www/server/panel/vhost/nginx/proxy/${SITE_NAME}/*.conf;
+      #include /www/server/panel/vhost/nginx/proxy/${SITE_NAME}/*.conf;
 
     #include enable-php-00.conf;
     #PHP-INFO-END
@@ -87,24 +88,5 @@ server
 EOF
 
 
-
-cat << EOF >/www/wwwroot/${SITE_NAME}/index.html
-
-<html>
-<body>
-hello ${SITE_NAME}
-</body>
-</html>
-
-EOF
-
-echo "create proxy"
-PROXY_NAME=default
-DEFAULT_PORT=$FORWARED_PORT
-# 创建反向代理
-mkdir -p /www/server/panel/vhost/nginx/proxy/${SITE_NAME}
-echo "create proxy ${SITE_NAME} ${CONTAINER_IP} ${DEFAULT_PORT} ${PROXY_NAME}"
-sh create_proxy.sh ${SITE_NAME} ${CONTAINER_IP} ${DEFAULT_PORT} ${PROXY_NAME}
-# ====================================
-
 systemctl restart nginx
+

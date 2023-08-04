@@ -9,5 +9,5 @@ fi
 
 docker rm -f ${CONTAINER_NAME}
 
-docker run -d --init --net mynetwork --name ${CONTAINER_NAME} --ip ${CONTAINER_IP} -v "$(pwd)/../:/home/project:cached" theiaide/theia-full
+docker run -d --init --net mynetwork --name ${CONTAINER_NAME} -u $(id -u):$(id -g) --ip ${CONTAINER_IP} -v "$(pwd)/../:/home/project:cached" theiaide/theia-full
 
