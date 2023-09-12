@@ -1,5 +1,5 @@
 #!/bin/bash
-DOMAIN=z2labplus.com
+DOMAIN=lab2plus.top
 
 CONTAINER_NAME=mydemo
 

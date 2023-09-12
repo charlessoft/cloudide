@@ -22,8 +22,16 @@ cat << EOF >/usr/local/nginx/conf/vhost/${SITE_NAME}.conf
 server
 {
     listen 80;
+    listen 443 ssl;
     server_name ${SITE_NAME};
     index index.php index.html index.htm default.php default.htm default.html;
+
+    ssl_certificate /etc/letsencrypt/live/lab2plus.top/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/lab2plus.top/privkey.pem;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
+    ssl_prefer_server_ciphers on;
+
     root /www/wwwroot/${SITE_NAME};
 
     #SSL-START SSL相关配置，请勿删除或修改下一行带注释的404规则
